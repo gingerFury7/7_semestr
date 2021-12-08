@@ -10,10 +10,10 @@ struct BinTree{
 };
 
 void newBinTree (int val, BinTree** Tree) {
-    if ((*Tree) == NULL){
+    if ((*Tree) == nullptr){
         (*Tree) = new BinTree;
         (*Tree)->value = val;
-        (*Tree)->left = (*Tree)->right = NULL;
+        (*Tree)->left = (*Tree)->right = nullptr;
     }
     if (val > (*Tree)->value)
         newBinTree(val, &(*Tree)->right);
@@ -21,7 +21,7 @@ void newBinTree (int val, BinTree** Tree) {
 }
 
 void Print (BinTree* Tree){
-    if (Tree != NULL){
+    if (Tree != nullptr){
         cout << Tree->value << endl;
         Print(Tree->left);
         Print(Tree->right);
@@ -29,9 +29,17 @@ void Print (BinTree* Tree){
 }
 
 BinTree* Search (BinTree* Tree, int key){
-    if (Tree == NULL) return NULL;
+    if (Tree == nullptr) return nullptr;
     if (Tree->value == key) return Tree;
     if (Tree->value > key)
         Search(Tree->left, key);
     else Search(Tree->right, key);
+}
+
+void destroyBinTree (BinTree* Tree){
+    if (Tree != nullptr){
+        destroyBinTree(Tree->left);
+        destroyBinTree(Tree->right);
+        delete(Tree);
+    }
 }
