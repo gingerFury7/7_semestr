@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/macbook/Desktop/Учеба/7 сем/Прога/2/main.cpp
+stdio.h
+/Users/macbook/Desktop/Учеба/7 сем/Прога/2/stdio.h
+iostream
+-
+chrono
+-
+vector
+-
+random
+-
+
