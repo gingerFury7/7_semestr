@@ -1,4 +1,4 @@
-# Install script for directory: /Users/macbook/Desktop/Учеба/7 сем/Прога/4
+# Install script for directory: /Users/macbook/Desktop/Учеба/7 сем/Прога/4_HorseChess
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/macbook/Desktop/Учеба/7 сем/Прога/4/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/macbook/Desktop/Учеба/7 сем/Прога/4_HorseChess/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-const int SIZE_FIELD = 5;
+const int SIZE_FIELD = 9;
 
 int masX[8] = {1, 2, 2, 1, -1, -2, -2, -1};
 int masY[8] = {2, 1, -1, -2, -2, -1, 1, 2};
@@ -40,6 +40,6 @@ void Horse (int mas[][SIZE_FIELD], int num, int i0, int j0) {
 
 int main() {
     int Matr[SIZE_FIELD][SIZE_FIELD] = {};
-    Horse(Matr, 1, 4, 0);
+    Horse(Matr, 1, 0, 0);
     return 0;
 }

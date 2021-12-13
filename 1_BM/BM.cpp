@@ -69,7 +69,6 @@ void search_Direct(char *t, char *s){
         if (j == m) {
             k++;
             res = i;
-            break;
         }
     };
 
@@ -86,7 +85,7 @@ void search_Direct(char *t, char *s){
 int main(){
     srand(time(NULL));
     int n = 1000000;
-    int m = 7;
+    int m = 9;
     char txt[n];
     char s[m];
     for(int i = 0; i < n; i++)

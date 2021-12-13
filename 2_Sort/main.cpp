@@ -4,7 +4,7 @@
 #include <vector>
 #include <random>
 
-void bubbleSort (const int *num, int size){
+int bubbleSort (const int *num, int size){
     int a[size];
     for (int i = 0; i < size; i++){
         a[i] = num[i];
@@ -26,12 +26,10 @@ void bubbleSort (const int *num, int size){
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
 
-    std::cout << "----Сортировка обменом---- " << std::endl;
-    std::cout << "Длительность работы: " << duration.count() << " ms" << std::endl;
-    std::cout << "Количество сравнений: " << k << std::endl;
+    return duration.count();
 }
 
-void insertSort (const int *num, int size) {
+int insertSort (const int *num, int size) {
     int a[size];
     for (int i = 0; i < size; i++){
         a[i] = num[i];
@@ -55,12 +53,10 @@ void insertSort (const int *num, int size) {
     auto end = std::chrono::steady_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
 
-    std::cout << "----Сортировка вставками---- " << std::endl;
-    std::cout << "Длительность работы: " << duration.count() << " ms" << std::endl;
-    std::cout << "Количество сравнений: " << k << std::endl;
+    return duration.count();
 }
 
-void selectionSort (const int *num, int size) {
+int selectionSort (const int *num, int size) {
     int a[size];
     for (int i = 0; i < size; i++){
         a[i] = num[i];
@@ -85,9 +81,7 @@ void selectionSort (const int *num, int size) {
     auto end = std::chrono::steady_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
 
-    std::cout << "----Сортировка выбором---- " << std::endl;
-    std::cout << "Длительность работы: " << duration.count() << " ms" << std::endl;
-    std::cout << "Количество сравнений: " << k << std::endl;
+    return duration.count();
 }
 
 int main() {
@@ -95,37 +89,39 @@ int main() {
     int N = 70;
     int a[N];
 
+    int durationBuble = 0;
+    int durationInsert = 0;
+    int durationSelection = 0;
 
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::vector  <std::vector <int>>  V(2*N+1, std::vector <int> (N) );
-    for(int i=0;i < N;i++){ V[N][i] = mt()%(N);}
-    for(int j=N+1;j < 2*N+1;j++){
-        V[j][0] = V[j-1][0];
-        for(int i=1;i < N;i++){
-            if(V[j-1][i]>V[j][i-1]){
-                V[j][i] = V[j-1][i];
-            }
-            else{
-                V[j][i] = V[j][i-1];
-                V[j][i-1] = V[j-1][i];
+    for (int x = 0; x < 1000; x++) {
+        std::random_device rd;
+        std::mt19937 mt(rd());
+        std::vector<std::vector<int>> V(2 * N + 1, std::vector<int>(N));
+        for (int i = 0; i < N; i++) { V[N][i] = mt() % (N); }
+        for (int j = N + 1; j < 2 * N + 1; j++) {
+            V[j][0] = V[j - 1][0];
+            for (int i = 1; i < N; i++) {
+                if (V[j - 1][i] > V[j][i - 1]) {
+                    V[j][i] = V[j - 1][i];
+                } else {
+                    V[j][i] = V[j][i - 1];
+                    V[j][i - 1] = V[j - 1][i];
+                }
             }
         }
-    }
 
 
-    for(int j=N-1; j > -1; j--){
-        V[j][N-1] = V[j+1][N-1];
-        for(int i=N-2; i > -1; i--){
-            if(V[j+1][i]>V[j][i+1]){
-                V[j][i] = V[j+1][i];
-            }
-            else{
-                V[j][i] = V[j][i+1];
-                V[j][i+1] = V[j+1][i];
+        for (int j = N - 1; j > -1; j--) {
+            V[j][N - 1] = V[j + 1][N - 1];
+            for (int i = N - 2; i > -1; i--) {
+                if (V[j + 1][i] > V[j][i + 1]) {
+                    V[j][i] = V[j + 1][i];
+                } else {
+                    V[j][i] = V[j][i + 1];
+                    V[j][i + 1] = V[j + 1][i];
+                }
             }
         }
-    }
 
 //    for(int i = 0; i < 2 * N + 1; i++){
 //        for(int j = 0; j < N; j++){
@@ -133,13 +129,19 @@ int main() {
 //        }
 //        std::cout << '\n';
 //    }
-    for(int i = 0; i < N; i++){
-        a[i] = V[118][i];
-        std::cout << a[i] << ' ';
+
+        for (int i = 0; i < N; i++) {
+            a[i] = V[70][i];
+//            std::cout << a[i] << ' ';
+        }
+        durationBuble += bubbleSort(a, N);
+        durationInsert += insertSort(a, N);
+        durationSelection += selectionSort(a, N);
     }
-    bubbleSort(a, N);
-    insertSort(a, N);
-    selectionSort(a, N);
+
+    std::cout << "buble: " << durationBuble / 1000 << std::endl;
+    std::cout << "Insert: " << durationInsert / 1000 << std::endl;
+    std::cout << "selection: " << durationSelection / 1000 << std::endl;
 
     return 0;
 }

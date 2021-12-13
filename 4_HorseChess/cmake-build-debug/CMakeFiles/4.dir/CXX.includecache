@@ -6,10 +6,8 @@
 
 #IncludeRegexTransform: 
 
-/Users/macbook/Desktop/Учеба/7 сем/Прога/4/main.cpp
+/Users/macbook/Desktop/Учеба/7 сем/Прога/4_HorseChess/main.cpp
 iostream
--
-time.h
 -
 iomanip
 -
