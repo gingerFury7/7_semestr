@@ -6,7 +6,19 @@
 
 #IncludeRegexTransform: 
 
+/Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/dualPivotQuckSort.h
+iostream
+-
+
 /Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/main.cpp
+iostream
+-
+dualPivotQuckSort.h
+/Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/dualPivotQuckSort.h
+quickSort.h
+/Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/quickSort.h
+
+/Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/quickSort.h
 iostream
 -
 
