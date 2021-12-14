@@ -13,6 +13,12 @@ iostream
 /Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/main.cpp
 iostream
 -
+chrono
+-
+vector
+-
+random
+-
 dualPivotQuckSort.h
 /Users/macbook/Desktop/Учеба/7 сем/Прога/3_QuickSort/dualPivotQuckSort.h
 quickSort.h
