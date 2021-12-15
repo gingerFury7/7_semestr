@@ -19,7 +19,11 @@ int main() {
         list.push_front(a);
         tree = insert(tree, a);
     }
+    tree = insert(tree, 502);
     list.print();
     cout << endl;
     printBinTree(tree);
+    cout << endl;
+//    BinTree *searchTree = search(tree, 106);
+//    printBinTree(searchTree);
 }

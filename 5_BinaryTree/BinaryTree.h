@@ -62,6 +62,16 @@ struct BinTree *deleteBinTree(struct BinTree *root, int key) {
     return root;
 }
 
+struct BinTree *search (struct BinTree *tree, int key){
+    while (tree && tree->key != key){
+        if (tree->key < key)
+            tree = tree->right;
+        else
+            tree = tree->left;
+    }
+    return tree;
+}
+
 void printBinTree (struct BinTree *tree){
     if (tree != nullptr){
         printBinTree(tree->left);
