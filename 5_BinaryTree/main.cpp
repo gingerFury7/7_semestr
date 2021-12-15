@@ -8,11 +8,18 @@ using namespace std;
 
 int main() {
     List list;
-    srand(time(NULL));
+    BinTree *tree;
+    int a = 0;
+    srand(time(nullptr));
+
     int n = 10;
+
     for (int i = 0; i < n; i++){
-        list.push_front( rand() % 1000);
+        a = rand() % 1000;
+        list.push_front(a);
+        tree = insert(tree, a);
     }
     list.print();
-    list.search(57);
+    cout << endl;
+    printBinTree(tree);
 }

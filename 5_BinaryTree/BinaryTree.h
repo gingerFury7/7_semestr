@@ -1,45 +1,71 @@
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
-struct BinTree{
-    int value;
-    BinTree* left;
-    BinTree* right;
+struct BinTree {
+    int key;
+    struct BinTree *left, *right;
 };
 
-void newBinTree (int val, BinTree** Tree) {
-    if ((*Tree) == nullptr){
-        (*Tree) = new BinTree;
-        (*Tree)->value = val;
-        (*Tree)->left = (*Tree)->right = nullptr;
+struct BinTree *newBinTree (int item) {
+    struct BinTree *temp = (struct BinTree *)malloc(sizeof(struct BinTree));
+    temp->key = item;
+    temp->left = temp->right = nullptr;
+    return temp;
+}
+
+struct BinTree *insert (struct BinTree *BinTree, int key){
+    if (BinTree == nullptr) return newBinTree(key);
+
+    if (key < BinTree->key)
+        BinTree->left = insert(BinTree->left, key);
+    else
+        BinTree->right = insert(BinTree->right, key);
+
+    return BinTree;
+}
+
+struct BinTree *minValueNode(struct BinTree *node) {
+    struct BinTree *current = node;
+
+    // Find the leftmost leaf
+    while (current && current->left != nullptr)
+        current = current->left;
+
+    return current;
+}
+
+struct BinTree *deleteBinTree(struct BinTree *root, int key) {
+    if (root == nullptr) return root;
+
+    if (key < root->key)
+        root->left = deleteBinTree(root->left, key);
+    else if (key > root->key)
+        root->right = deleteBinTree(root->right, key);
+    else {
+        if (root->left == nullptr) {
+            struct BinTree*temp = root->right;
+            free(root);
+            return temp;
+        } else if (root->right == nullptr) {
+            struct BinTree *temp = root->left;
+            free(root);
+            return temp;
+        }
+
+        struct BinTree *temp = minValueNode(root->right);
+
+        root->key = temp->key;
+
+        root->right = deleteBinTree(root->right, temp->key);
     }
-    if (val > (*Tree)->value)
-        newBinTree(val, &(*Tree)->right);
-    else newBinTree(val, &(*Tree)->left);
+    return root;
 }
 
-void Print (BinTree* Tree){
-    if (Tree != nullptr){
-        cout << Tree->value << endl;
-        Print(Tree->left);
-        Print(Tree->right);
-    }
-}
-
-BinTree* Search (BinTree* Tree, int key){
-    if (Tree == nullptr) return nullptr;
-    if (Tree->value == key) return Tree;
-    if (Tree->value > key)
-        Search(Tree->left, key);
-    else Search(Tree->right, key);
-}
-
-void destroyBinTree (BinTree* Tree){
-    if (Tree != nullptr){
-        destroyBinTree(Tree->left);
-        destroyBinTree(Tree->right);
-        delete(Tree);
+void printBinTree (struct BinTree *tree){
+    if (tree != nullptr){
+        printBinTree(tree->left);
+        cout << tree->key << "->";
+        printBinTree(tree->right);
     }
 }
