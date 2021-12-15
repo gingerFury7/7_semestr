@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/BinaryTree.h
+iostream
+-
+
+/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/List.h
+iostream
+-
+stdio.h
+-
+
+/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/main.cpp
+iostream
+-
+string
+/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/string
+List.h
+/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/List.h
+BinaryTree.h
+/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/BinaryTree.h
+
