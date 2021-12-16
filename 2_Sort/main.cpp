@@ -4,20 +4,22 @@
 #include <vector>
 #include <random>
 
-int bubbleSort (const int *num, int size){
+int bubbleSort(const int *num, int size) {
     int a[size];
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         a[i] = num[i];
     }
 
     auto begin = std::chrono::high_resolution_clock::now();
     int k = 0;
-
-    for (int i = 0; i < size - 1; i++){
-        for (int j = (size - 1); j > i; j--){
-            if (a[j - 1] > a[j]){
-                int temp = a[j-1];
-                a[j-1] = a[j];
+    int counter = 1;
+    while (counter) {
+        counter = 0;
+        for (int j = 0; j < size - 1; j++) {
+            if (a[j - 1] > a[j]) {
+                counter++;
+                int temp = a[j - 1];
+                a[j - 1] = a[j];
                 a[j] = temp;
                 k++;
             }
@@ -29,20 +31,20 @@ int bubbleSort (const int *num, int size){
     return duration.count();
 }
 
-int insertSort (const int *num, int size) {
+int insertSort(const int *num, int size) {
     int a[size];
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         a[i] = num[i];
     }
 
     auto begin = std::chrono::steady_clock::now();
     int k = 0;
 
-    for(int i = 1; i < size; i++){
+    for (int i = 1; i < size; i++) {
         int key = a[i];
         int j = i - 1;
 
-        while (key < a[j] && j >= 0){
+        while (key < a[j] && j >= 0) {
             a[j + 1] = a[j];
             --j;
             k++;
@@ -56,9 +58,9 @@ int insertSort (const int *num, int size) {
     return duration.count();
 }
 
-int selectionSort (const int *num, int size) {
+int selectionSort(const int *num, int size) {
     int a[size];
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         a[i] = num[i];
     }
 
@@ -70,7 +72,7 @@ int selectionSort (const int *num, int size) {
     for (int i = 0; i < size - 1; i++) {
         min = i;
         for (int j = i + 1; j < size; j++) {
-            if (a[j] < a[min]){
+            if (a[j] < a[min]) {
                 min = j;
             }
             k++;
@@ -131,7 +133,7 @@ int main() {
 //    }
 
         for (int i = 0; i < N; i++) {
-            a[i] = V[70][i];
+            a[i] = V[0][i];
 //            std::cout << a[i] << ' ';
         }
         durationBuble += bubbleSort(a, N);

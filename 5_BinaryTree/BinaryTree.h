@@ -25,6 +25,23 @@ struct BinTree *insert (struct BinTree *BinTree, int key){
     return BinTree;
 }
 
+struct BinTree *insertWithCount (struct BinTree *BinTree, int key){
+    static int k = 0;
+    if (BinTree == nullptr) return newBinTree(key);
+
+    if (key < BinTree->key) {
+        BinTree->left = insert(BinTree->left, key);
+        k++;
+    }
+    else {
+        BinTree->right = insert(BinTree->right, key);
+        k++;
+    }
+
+    cout << k << endl;
+    return BinTree;
+}
+
 struct BinTree *minValueNode(struct BinTree *node) {
     struct BinTree *current = node;
 

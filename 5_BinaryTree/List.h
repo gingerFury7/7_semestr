@@ -51,7 +51,7 @@ public:
         Node* node = head;
         for (int i = 0; i < size - 1; i++){
             if (node->data == data){
-                return i;
+                return i + 1;
             }
         }
         return -1;

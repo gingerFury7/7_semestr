@@ -12,18 +12,19 @@ int main() {
     int a = 0;
     srand(time(nullptr));
 
-    int n = 10;
+    int n = 100;
 
     for (int i = 0; i < n; i++){
         a = rand() % 1000;
         list.push_front(a);
         tree = insert(tree, a);
     }
-    tree = insert(tree, 502);
+//    tree = insertWithCount(tree, 502);
+//    cout << endl;
+    int x = list.search(502);
+    cout << x << endl;
     list.print();
-    cout << endl;
-    printBinTree(tree);
-    cout << endl;
-//    BinTree *searchTree = search(tree, 106);
-//    printBinTree(searchTree);
+//    cout << endl;
+//    printBinTree(tree);
+//    cout << endl;
 }
