@@ -1,31 +1,37 @@
 #include <iostream>
 
-void quickSort (int *array, int low, int high){
-
-    static auto begin = std::chrono::high_resolution_clock::now();
+void quickSort (int *array, int low, int high, int *swapsCounter, int *compareCounter){
 
     int i = low;
     int j = high;
     int pivot = array[(i+j) / 2];
 
     while (i <= j){
-        while (array[i] < pivot)
+        while (array[i] < pivot) {
             i++;
-        while (array[j] > pivot)
+            (*compareCounter)++;
+        }
+        while (array[j] > pivot) {
             j--;
+            (*compareCounter)++;
+        }
         if (i <= j){
             swap(&array[i], &array[j]);
+            (*compareCounter)++;
+            (*swapsCounter)++;
             i++;
             j--;
         }
+        (*compareCounter)++;
     }
 
-    if (j > low)
-        quickSort(array, low, j);
-    if (i < high)
-        quickSort(array, i, high);
-
-    static auto end = std::chrono::high_resolution_clock::now();
-    static auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+    if (j > low) {
+        quickSort(array, low, j, swapsCounter, compareCounter);
+        (*compareCounter)++;
+    }
+    if (i < high) {
+        quickSort(array, i, high, swapsCounter, compareCounter);
+        (*compareCounter)++;
+    }
 
 }

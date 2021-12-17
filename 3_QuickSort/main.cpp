@@ -15,7 +15,7 @@ void printArray(int *array, int n)
 
 int main()
 {
-    int N = 30000;
+    int N = 10000;
     int arrayA[N];
     int arrayB[N];
 
@@ -53,27 +53,36 @@ int main()
         }
 
         for (int i = 0; i < N; i++) {
-            arrayA[i] = V[N][i];
-            arrayB[i] = V[N][i];
+            arrayA[i] = V[126][i];
+            arrayB[i] = V[126][i];
 //            std::cout << arrayA[i] << ' ';
         }
 //        std::cout << std::endl;
 
-        auto begin = std::chrono::high_resolution_clock::now();
-        quickSort(arrayA, 0, N - 1);
-        auto end = std::chrono::high_resolution_clock::now();
-        auto durationQuick = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+        int quickSortSwapsCounter = 0;
+        int quickSortCompareCounter = 0;
+        int dualPivotSwapsCounter = 0;
+        int dualPivotCompareCounter = 0;
 
-        auto begin1 = std::chrono::high_resolution_clock::now();
-        dualPivotQuickSort_2(arrayB, 0, N - 1);
-        auto end1 = std::chrono::high_resolution_clock::now();
-        auto durationDualPivotQuick = std::chrono::duration_cast<std::chrono::microseconds>(end1 - begin1);
+//        auto begin = std::chrono::high_resolution_clock::now();
+        quickSort(arrayA, 0, N - 1, &quickSortSwapsCounter, &quickSortCompareCounter);
+//        auto end = std::chrono::high_resolution_clock::now();
+//        auto durationQuick = std::chrono::duration_cast<std::chrono::microseconds>(end - begin);
+//
+//        auto begin1 = std::chrono::high_resolution_clock::now();
+        dualPivotQuickSort_2(arrayB, 0, N - 1, &dualPivotSwapsCounter, &dualPivotCompareCounter);
+//        auto end1 = std::chrono::high_resolution_clock::now();
+//        auto durationDualPivotQuick = std::chrono::duration_cast<std::chrono::microseconds>(end1 - begin1);
 //    }
 
-    std::cout << "QuickSort: " << durationQuick.count() << std::endl;
+//    std::cout << "QuickSort: " << durationQuick.count() << std::endl;
 //    printArray(arrayA, N);
-    std::cout << "DualPivotQuickSort: " << durationDualPivotQuick.count() << std::endl;
+//    std::cout << "DualPivotQuickSort: " << durationDualPivotQuick.count() << std::endl;
 //    printArray(arrayB, N);
+
+        std::cout << "QuickSort: " << quickSortSwapsCounter << ", " << quickSortCompareCounter << std::endl;
+        std::cout << "DualPivot: " << dualPivotSwapsCounter << ", " << dualPivotCompareCounter << std::endl;
+
 
     return (0);
 
