@@ -1,60 +1,82 @@
 #include <iostream>
-#include <stdio.h>
+#include <string>
 
 using namespace std;
-
-struct Node{
-    int data;
-    Node* next;
-};
-
-class List {
-    Node* head;
-    Node* tail;
-    int size;
-
-public:
-    List(){
-        head = nullptr;
-        size = 0;
-    }
-
-    ~List(){
-        tail = head;
-        while (head)
-        {
-            head = head->next;
-            delete tail;
-            tail = head;
-        }
-    }
-    void print()
+ 
+struct Node {
+    string val;
+    struct Node* next;
+    Node(string x)
     {
-        Node* node = head;
-        while (node != nullptr)
-        {
-            cout << node->data << '\t';
-            node = node->next;
+        val = x;
+        next = nullptr;
+    }
+};
+ 
+class List {
+private:
+    int listSize = 0;
+ 
+public:
+    int listCompare = 0;
+    Node* head;
+    Node* sorted;
+ 
+    void push(string val)
+    {
+        Node* newNode = new Node(val);
+        newNode->next = head;
+        head = newNode;
+        listSize = 0;
+    }
+
+    void insertionSort(Node* headRef)
+    {
+        sorted = nullptr;
+        Node* current = headRef;
+        while (current != nullptr) {
+            Node* next = current->next;
+            sortedInsert(current);
+            current = next;
+            listCompare++;
         }
-        cout << endl;
+        head = sorted;
     }
-
-    void push_front(int data) {
-        Node* newElem = new Node;
-        newElem->data = data;
-        newElem->next = head;
-        head = newElem;
-        size++;
-    }
-
-    int search(int data) {
-        Node* node = head;
-        for (int i = 0; i < size - 1; i++){
-            if (node->data == data){
-                return i + 1;
+ 
+    /*
+     * function to insert a new_node in a list. Note that
+     * this function expects a pointer to head_ref as this
+     * can modify the head of the input linked list
+     * (similar to push())
+     */
+    void sortedInsert(Node* newnode)
+    {
+        /* Special case for the head end */
+        if (sorted == nullptr || sorted->val >= newnode->val) {
+            newnode->next = sorted;
+            sorted = newnode;
+            listCompare += 2;
+        }
+        else {
+            Node* current = sorted;
+            /* Locate the node before the point of insertion
+             */
+            while (current->next != nullptr
+                   && current->next->val < newnode->val) {
+                current = current->next;
+                listCompare += 2;
             }
+            newnode->next = current->next;
+            current->next = newnode;
+            listSize++;
         }
-        return -1;
     }
 
+    void printList(Node* head)
+    {
+        while (head != nullptr) {
+            cout << head->val << " ";
+            head = head->next;
+        }
+    }
 };
