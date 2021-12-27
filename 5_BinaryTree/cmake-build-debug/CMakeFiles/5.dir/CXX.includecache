@@ -9,18 +9,44 @@
 /Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/BinaryTree.h
 iostream
 -
+string
+-
+algorithm
+-
 
 /Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/List.h
 iostream
 -
-stdio.h
+cstdio
+-
+algorithm
+-
+iterator
+-
+numeric
+-
+string
+-
+fstream
 -
 
 /Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/main.cpp
 iostream
 -
+fstream
+-
 string
-/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/string
+-
+sstream
+-
+cstring
+-
+algorithm
+-
+vector
+-
+cstdlib
+-
 List.h
 /Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/List.h
 BinaryTree.h

@@ -1,82 +1,126 @@
 #include <iostream>
+#include <cstdio>
+#include <algorithm>
+#include <iterator>
+#include <numeric>
 #include <string>
+#include <fstream>
 
 using namespace std;
- 
-struct Node {
-    string val;
-    struct Node* next;
-    Node(string x)
-    {
-        val = x;
-        next = nullptr;
-    }
-};
- 
+
+using namespace std;
 class List {
-private:
-    int listSize = 0;
- 
+protected:
+    struct Node {
+        Node() : next(nullptr) {}
+
+        Node(string val) : a(val), next(nullptr) {}
+
+        string a;
+        Node *next;
+    };
+
+    Node *head;
+    int listSize;
 public:
     int listCompare = 0;
-    Node* head;
-    Node* sorted;
- 
-    void push(string val)
-    {
-        Node* newNode = new Node(val);
-        newNode->next = head;
-        head = newNode;
-        listSize = 0;
-    }
 
-    void insertionSort(Node* headRef)
+    List() {
+        head = nullptr;
+        listSize = 0;
+    };
+
+    ~List() {
+        while (head) { del(); }
+    };
+
+    string headEl() const { return head->a; }
+
+    void insert(const string t)
     {
-        sorted = nullptr;
-        Node* current = headRef;
-        while (current != nullptr) {
-            Node* next = current->next;
-            sortedInsert(current);
-            current = next;
-            listCompare++;
-        }
-        head = sorted;
-    }
- 
-    /*
-     * function to insert a new_node in a list. Note that
-     * this function expects a pointer to head_ref as this
-     * can modify the head of the input linked list
-     * (similar to push())
-     */
-    void sortedInsert(Node* newnode)
-    {
-        /* Special case for the head end */
-        if (sorted == nullptr || sorted->val >= newnode->val) {
-            newnode->next = sorted;
-            sorted = newnode;
-            listCompare += 2;
+        if (head) {
+            Node *i = head;
+            while (i != nullptr && i->a < t) {
+                listCompare += 2;
+                if (i->next) {
+                    i = i->next;
+                    listCompare++;
+                }
+                else {
+                    Node *nw = new Node();
+                    nw->a = t;
+                    nw->next = nullptr;
+                    i->next = nw;
+                    i = nullptr;
+                    listSize++;
+                    listCompare++;
+                    return;
+                }
+            }
+            if (i) {
+                listCompare++;
+                if (i != head) {
+                    listCompare++;
+                    if (i->a == t) {
+//                        listCompare++;
+                    }
+                    else {
+                        Node *nw = new Node();
+                        nw->next = i->next;
+                        nw->a = i->a;
+                        i->next = nw;
+                        i->a = t;
+                        listSize++;
+                        listCompare++;
+                        return;
+                    }
+                }
+                else {
+                    listCompare++;
+                    if (i->a == t) {
+//                        listCompare++;
+                    }
+                    else {
+                        Node *nw = new Node();
+                        nw->next = head;
+                        head = nw;
+                        nw->a = t;
+                        listCompare++;
+                        listSize++;
+                        return;
+                    }
+                }
+            }
         }
         else {
-            Node* current = sorted;
-            /* Locate the node before the point of insertion
-             */
-            while (current->next != nullptr
-                   && current->next->val < newnode->val) {
-                current = current->next;
-                listCompare += 2;
-            }
-            newnode->next = current->next;
-            current->next = newnode;
+            Node *nw = new Node();
+            head = nw;
+            nw->a = t;
             listSize++;
+            listCompare++;
+            return;
         }
     }
 
-    void printList(Node* head)
+    void del()
     {
-        while (head != nullptr) {
-            cout << head->val << " ";
-            head = head->next;
+        if (head)
+        {
+            Node *newhead = head->next;
+            delete head;
+            head = newhead;
         }
+    }
+
+//    void print() {
+//        Node *p = head;
+//        while (p != nullptr) {
+//            cout << "(" << p->a.first << ", " << p->a.second << ") ";
+//            p = p->next;
+//        }
+//    }
+
+    int size(){
+        return listSize;
     }
 };

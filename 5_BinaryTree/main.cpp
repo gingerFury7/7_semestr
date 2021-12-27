@@ -10,39 +10,35 @@
 #include "List.h"
 #include "BinaryTree.h"
 
-#define file_to_read "MonteChristo"
-#define file_to_write "result"
+#define file_to_read "/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/MasterAndMargarita"
+#define file_to_write "/Users/macbook/Desktop/Учеба/7 сем/Прога/5_BinaryTree/result"
 using namespace std;
 
 int test()
 {
-    //уникальных слов - 25649
-    //log(25649) = 14.65
-    cout << "amount_of_words\tbinary_tree\tskip_list\n";
+    cout << "amountOfWords\tbinaryTree\tlist\n";
     vector<string> words;
     string word;
     while(cin >> word)
     {
         words.push_back(word);
     }
-//    SkipList lst(15, 0.5);
     List list;
-    BinaryTree Tree;
+    binaryTree Tree;
     int last = 0;
-    for(int i=0; i<words.size(); i++)
+    for(int i = 0; i < words.size(); i++)
     {
         Tree.insert(words[i]);
-        list = sortedInsert(list);
-//        if(list.size != Tree.size())
-//        {
-//            return 1;
-//        }
-        if(lst.skip_list_size != last)
+        list.insert(words[i]);
+        if(list.size() != Tree.size())
         {
-            cout << lst.skip_list_size << "\t" << Tree.treeCompare << "\t" << lst.compare << "\n";
-            last = lst.skip_list_size;
+            return 1;
         }
-        cout << Tree.treeCompare << "\n";
+        if(list.size() != last)
+        {
+            cout << list.size() << "\t" << Tree.treeCompare << "\t" << list.listCompare << "\n";
+            last = list.size();
+        }
     }
     return 0;
 }

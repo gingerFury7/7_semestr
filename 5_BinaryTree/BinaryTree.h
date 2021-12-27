@@ -1,10 +1,9 @@
-#pragma once
 #include <iostream>
 #include <string>
 #include <algorithm>
 using namespace std;
 
-class BinaryTree
+class binaryTree
 {
 private:
 
@@ -22,45 +21,45 @@ private:
     };
 
     node* root;
-    int tree_size;
-    void print_tree(node* t)
+    int treeSize;
+    void printTree(node* t)
     {
         if (t)
         {
-            print_tree(t->left);
+            printTree(t->left);
             cout << t->data << " ";
-            print_tree(t->right);
+            printTree(t->right);
         }
     }
-    void delete_tree(node* t)
+    void deleteTree(node* t)
     {
         if (t)
         {
-            delete_tree(t->left);
-            delete_tree(t->right);
+            deleteTree(t->left);
+            deleteTree(t->right);
             delete t;
         }
     };
 
 public:
     int treeCompare = 0;
-    BinaryTree()
+    binaryTree()
     {
         root = nullptr;
-        tree_size = 0;
+        treeSize = 0;
     }
 
-    BinaryTree(string x)
+    binaryTree(string x)
     {
         root = new node(x);
-        tree_size = 1;
+        treeSize = 1;
     }
-    ~BinaryTree()
+    ~binaryTree()
     {
-        delete_tree(root);
+        deleteTree(root);
     }
     void print() {
-        print_tree(root);
+        printTree(root);
         cout << endl;
     }
     bool find(string x)
@@ -81,25 +80,25 @@ public:
         {
             root = new node(x);
             ++treeCompare;
-            ++tree_size;
+            ++treeSize;
             return;
         }
         node* t = root;
         while (t && t->data != x)
         {
-            treeCompare+=2;
+            treeCompare += 2;
             if (t->data > x && t->left == nullptr)
             {
                 t->left = new node(x);
-                treeCompare+=2;
-                ++tree_size;
+                treeCompare += 2;
+                ++treeSize;
                 return;
             }
             if (t->data < x && t->right == nullptr)
             {
                 t->right = new node(x);
-                ++tree_size;
-                treeCompare+=2;
+                ++treeSize;
+                treeCompare += 2;
                 return;
             }
             if (t->data > x) {
@@ -134,11 +133,12 @@ public:
             return;
         if (t->left == nullptr)
         {
+            //подвешивается правое поддерево
             if (parent && parent->left == t)
                 parent->left = t->right;
             if (parent && parent->right == t)
                 parent->right = t->right;
-            --tree_size;
+            --treeSize;
             delete t;
             return;
         }
@@ -148,7 +148,7 @@ public:
                 parent->left = t->left;
             if (parent && parent->right == t)
                 parent->right = t->left;
-            --tree_size;
+            --treeSize;
             delete t;
             return;
         }
@@ -160,6 +160,6 @@ public:
         t->data = replace_value;
     }
     int size() {
-        return tree_size;
+        return treeSize;
     }
 };
